@@ -17,10 +17,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+
 import cz.uhk.fim.brahavl1.stag.Fragments.EventsFragment;
 import cz.uhk.fim.brahavl1.stag.Fragments.FacultiesFragment;
 import cz.uhk.fim.brahavl1.stag.Fragments.HomeFragment;
 import cz.uhk.fim.brahavl1.stag.Fragments.SubjectsFragment;
+import cz.uhk.fim.brahavl1.stag.model.CalendarItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +44,18 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+//        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new HomeFragment()).commit();
+
+
+        //vytvořeníobjektu, předání jsonu a vypsani??
+        CalendarItem calendarItem = new CalendarItem("1.4.2017", "Odpada UMTE" );
+        String jsonCalendarItem = new Gson().toJson(calendarItem);
+        System.out.println(jsonCalendarItem);
+
+        CalendarItem newItem = new Gson().fromJson(jsonCalendarItem, CalendarItem.class);
+
+        System.out.println(newItem.dateFrom + ":" + newItem.description);
     }
 
     @Override
